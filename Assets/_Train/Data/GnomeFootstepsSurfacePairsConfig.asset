@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f8978f36424a9da6c50b760fe77db4, type: 3}
+  m_Name: GnomeFootstepsSurfacePairsConfig
+  m_EditorClassIdentifier: 
+  surfaceAudioPairs:
+  - surfaceType: 2
+    surfaceTexture: {fileID: 0}
+    audioClips:
+    - {fileID: 8300000, guid: fb8e4ffaafeec8f42ba65da77f45e002, type: 3}
+    - {fileID: 8300000, guid: 8a1cd4029842b594184ee638dcef8a08, type: 3}
+    - {fileID: 8300000, guid: 8dd0feb5ea3151a46887d46952439d75, type: 3}
+    - {fileID: 8300000, guid: 2a809401803f37d469d976edeb92540b, type: 3}
+  - surfaceType: 1
+    surfaceTexture: {fileID: 0}
+    audioClips:
+    - {fileID: 8300000, guid: d86c77870e7974c429fbabcc6ab18d1e, type: 3}
+    - {fileID: 8300000, guid: 238381b35aa18974c8fad059ae795193, type: 3}
+    - {fileID: 8300000, guid: 659557c283a9306428f9f22c3474d368, type: 3}
+    - {fileID: 8300000, guid: 3cb1aa669a11f154fa25a5cc44cd50f3, type: 3}
+  - surfaceType: 0
+    surfaceTexture: {fileID: 0}
+    audioClips:
+    - {fileID: 8300000, guid: 8bdbd91b933adee4d9e50feccae9ada3, type: 3}
+    - {fileID: 8300000, guid: dd276e63e8250af4e9630982b65bd9a2, type: 3}
+    - {fileID: 8300000, guid: d4e35d24270c2594fae365491729a6c0, type: 3}
+    - {fileID: 8300000, guid: c43e573a639f281498be7f5c579c3cbb, type: 3}
+  - surfaceType: 3
+    surfaceTexture: {fileID: 0}
+    audioClips:
+    - {fileID: 8300000, guid: 7e184f62e960a4a4a811b0975c613de3, type: 3}
+    - {fileID: 8300000, guid: caad6359e422d334f94ececfeab42fb8, type: 3}
+    - {fileID: 8300000, guid: d2b6afd106f39c449b47903ef222cf55, type: 3}
+    - {fileID: 8300000, guid: 1736a6a17f1503141858107a880405c1, type: 3}

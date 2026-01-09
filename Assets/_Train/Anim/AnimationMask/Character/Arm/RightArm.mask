@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RightArm
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand1_bone.L/GardenGnome_Finger1_1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand1_bone.L/GardenGnome_Finger1_1_bone.L/GardenGnome_Finger1_2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand2_bone.L/GardenGnome_Finger2_1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand2_bone.L/GardenGnome_Finger2_1_bone.L/GardenGnome_Finger2_2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand2_bone.L/GardenGnome_Finger2_1_bone.L/GardenGnome_Finger2_2_bone.L/GardenGnome_Finger2_3_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand3_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand3_bone.L/GardenGnome_Finger3_1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand3_bone.L/GardenGnome_Finger3_1_bone.L/GardenGnome_Finger3_2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand3_bone.L/GardenGnome_Finger3_1_bone.L/GardenGnome_Finger3_2_bone.L/GardenGnome_Finger3_3_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand4_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand4_bone.L/GardenGnome_Finger4_1_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand4_bone.L/GardenGnome_Finger4_1_bone.L/GardenGnome_Finger4_2_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.L/GardenGnome_Arm1_bone.L/GardenGnome_Arm2_bone.L/GardenGnome_Hand_bone.L/GardenGnome_Hand4_bone.L/GardenGnome_Finger4_1_bone.L/GardenGnome_Finger4_2_bone.L/GardenGnome_Finger4_3_bone.L
+    m_Weight: 0
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand1_bone.R/GardenGnome_Finger1_1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand1_bone.R/GardenGnome_Finger1_1_bone.R/GardenGnome_Finger1_2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand2_bone.R/GardenGnome_Finger2_1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand2_bone.R/GardenGnome_Finger2_1_bone.R/GardenGnome_Finger2_2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand2_bone.R/GardenGnome_Finger2_1_bone.R/GardenGnome_Finger2_2_bone.R/GardenGnome_Finger2_3_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand3_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand3_bone.R/GardenGnome_Finger3_1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand3_bone.R/GardenGnome_Finger3_1_bone.R/GardenGnome_Finger3_2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand3_bone.R/GardenGnome_Finger3_1_bone.R/GardenGnome_Finger3_2_bone.R/GardenGnome_Finger3_3_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand4_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand4_bone.R/GardenGnome_Finger4_1_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand4_bone.R/GardenGnome_Finger4_1_bone.R/GardenGnome_Finger4_2_bone.R
+    m_Weight: 1
+  - m_Path: BaseGnomes_FirstPerson/GardenGnome_Shoulder_bone.R/GardenGnome_Arm1_bone.R/GardenGnome_Arm2_bone.R/GardenGnome_Hand_bone.R/GardenGnome_Hand4_bone.R/GardenGnome_Finger4_1_bone.R/GardenGnome_Finger4_2_bone.R/GardenGnome_Finger4_3_bone.R
+    m_Weight: 1
+  - m_Path: GardenGnome_Body_mesh.Hands
+    m_Weight: 0
+  - m_Path: GardenGnome_TopWear1_Hands
+    m_Weight: 0
