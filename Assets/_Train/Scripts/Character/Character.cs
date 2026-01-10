@@ -26,6 +26,7 @@ namespace _Train.Scripts.Character
         [SerializeField] private CharacterContext characterContext;
 
         private Vector3 _startPosition;
+        private Vector3 _externalVelocity;
         private Coroutine _lockStaminaRoutine;
 
         public float VerticalVelocity { get; set; }
@@ -48,6 +49,7 @@ namespace _Train.Scripts.Character
             _startPosition = transform.position;
         }
         
+        public void SetExternalVelocity(Vector3 velocity) => _externalVelocity = velocity;  
 
         public void LockPlayer()
         {
@@ -195,6 +197,8 @@ namespace _Train.Scripts.Character
             {
                 return;
             }
+
+            velocity += _externalVelocity;
             
             if (applyGravity)
             {
@@ -208,7 +212,7 @@ namespace _Train.Scripts.Character
             
             VerticalVelocity = characterRigidbody.linearVelocity.y;
         }
-
+        
         private void ApplyGravity(Vector3 targetVeloсity)
         {
             var gravityEffect = _stateMachine.Context.Character.Gravity * Time.fixedDeltaTime;

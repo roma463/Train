@@ -1,0 +1,114 @@
+using System.Collections.Generic;
+using UnityEngine;
+using _Train.Scripts.Character;
+
+public class TrainAttachZone : MonoBehaviour
+{
+    [SerializeField] private Transform attachRoot;
+    [SerializeField] private bool detachOnExit = true;
+    
+    [SerializeField] private TrainMotion trainMotion;
+    
+    [SerializeField] private bool onlyLocalPlayer = true;
+
+    private readonly HashSet<Character> passengers = new();
+
+    private void Reset()
+    {
+        attachRoot = transform.parent;
+
+        var col = GetComponent<Collider>();
+        if (col) col.isTrigger = true;
+    }
+
+    private void Awake()
+    {
+        if (!attachRoot) attachRoot = transform.parent;
+        if (!trainMotion) trainMotion = GetComponentInParent<TrainMotion>();
+
+        var col = GetComponent<Collider>();
+        if (col && !col.isTrigger) col.isTrigger = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!trainMotion) return;
+        if (passengers.Count == 0) return;
+
+        Vector3 v = trainMotion.Velocity;
+
+        foreach (var ch in passengers)
+        {
+            if (!ch) continue;
+
+            if (onlyLocalPlayer && !ch.isLocalPlayer)
+                continue;
+
+            ch.SetExternalVelocity(v);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var characterRoot = other.attachedRigidbody
+            ? other.attachedRigidbody.transform
+            : other.transform.root;
+
+        var character = characterRoot.GetComponentInParent<Character>();
+        if (!character) return;
+
+        if (onlyLocalPlayer && !character.isLocalPlayer)
+            return;
+        
+        passengers.Add(character);
+        
+        Attach(character.transform.root);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!detachOnExit) return;
+
+        var characterRoot = other.attachedRigidbody
+            ? other.attachedRigidbody.transform
+            : other.transform.root;
+
+        var character = characterRoot.GetComponentInParent<Character>();
+        if (!character) return;
+
+        if (onlyLocalPlayer && !character.isLocalPlayer)
+            return;
+
+        passengers.Remove(character);
+        
+        character.SetExternalVelocity(Vector3.zero);
+
+        Detach(character.transform.root);
+    }
+
+    private void OnDisable()
+    {
+        foreach (var ch in passengers)
+        {
+            if (!ch) continue;
+            ch.SetExternalVelocity(Vector3.zero);
+        }
+        passengers.Clear();
+    }
+
+    private void Attach(Transform characterRoot)
+    {
+        if (!attachRoot) return;
+        if (characterRoot.parent == attachRoot) return;
+
+        characterRoot.SetParent(attachRoot, true);
+    }
+
+    private void Detach(Transform characterRoot)
+    {
+        if (!attachRoot) return;
+        if (characterRoot.parent != attachRoot) return;
+
+        characterRoot.SetParent(null, true);
+    }
+}
