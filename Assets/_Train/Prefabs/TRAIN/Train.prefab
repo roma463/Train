@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveButton
   train: {fileID: 7236256644689596905}
-  targetSpeed: 10
+  targetSpeed: 1
 --- !u!1 &2303925402111606979
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 3892736449414849847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.93, z: 0}
   m_LocalScale: {x: 1.2447864, y: 1, z: 0.48610187}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -612,7 +612,7 @@ Transform:
   m_GameObject: {fileID: 3963996619153181127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.93000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -875,7 +875,7 @@ GameObject:
   m_Layer: 3
   m_Name: Train
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -935,6 +935,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b19a11b8c09de4a98e6615e8ad992a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainMotion
+  rails: {fileID: 0}
   acceleration: 8
   braking: 14
   trainRb: {fileID: 2559725316457395916}
+  maxSpeed: 10
+  range: 0

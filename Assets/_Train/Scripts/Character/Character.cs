@@ -63,6 +63,8 @@ namespace _Train.Scripts.Character
         
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             _remoteClient.SetActive(!isLocalPlayer);
             _localClient.SetActive(isLocalPlayer);
             characterRigidbody.isKinematic = !isLocalPlayer;

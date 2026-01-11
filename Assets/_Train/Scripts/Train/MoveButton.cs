@@ -1,6 +1,7 @@
 using System;
 using _Train.Scripts.Character;
 using _Train.Scripts.Root;
+using _Train.Scripts.Train;
 using UnityEngine;
 
 public class MoveButton : MonoBehaviour, IInteractable

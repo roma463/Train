@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using _Train.Scripts.Character;
+using _Train.Scripts.Train;
 
 public class TrainAttachZone : MonoBehaviour
 {
