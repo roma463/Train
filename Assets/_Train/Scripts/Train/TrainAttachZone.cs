@@ -62,6 +62,7 @@ public class TrainAttachZone : MonoBehaviour
             return;
         
         passengers.Add(character);
+        character.SetPassengers(true);
         
         Attach(character.transform.root);
     }
@@ -70,21 +71,18 @@ public class TrainAttachZone : MonoBehaviour
     {
         if (!detachOnExit) return;
 
-        var characterRoot = other.attachedRigidbody
-            ? other.attachedRigidbody.transform
-            : other.transform.root;
+        if (other.TryGetComponent(out Character character))
+        {
+            if (onlyLocalPlayer && !character.isLocalPlayer)
+                return;
 
-        var character = characterRoot.GetComponentInParent<Character>();
-        if (!character) return;
+            passengers.Remove(character);
+            character.SetPassengers(false);
+            
+            character.SetExternalVelocity(Vector3.zero);
 
-        if (onlyLocalPlayer && !character.isLocalPlayer)
-            return;
-
-        passengers.Remove(character);
-        
-        character.SetExternalVelocity(Vector3.zero);
-
-        Detach(character.transform.root);
+            Detach(character.transform);
+        }
     }
 
     private void OnDisable()

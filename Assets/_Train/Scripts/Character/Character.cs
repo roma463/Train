@@ -10,6 +10,10 @@ namespace _Train.Scripts.Character
 {
     public class Character : NetworkBehaviour, IDamageable
     {
+        public float VerticalVelocity { get; set; }
+        public bool IsLockRestoreStamina { get; set; }
+        public bool IsPassenger { get; private set; }
+        
         [field: SerializeField] public CharacterColllision Collision { get; private set; }
         [field: SerializeField] public float Gravity { get; private set; } = -9.81f;
         [field: SerializeField] public bool IsLockPlayer { get; private set; }
@@ -28,9 +32,7 @@ namespace _Train.Scripts.Character
         private Vector3 _startPosition;
         private Vector3 _externalVelocity;
         private Coroutine _lockStaminaRoutine;
-
-        public float VerticalVelocity { get; set; }
-        public bool IsLockRestoreStamina { get; set; }
+        
         public bool IsWalking => _stateMachine.CurrentStateType == CharacterStateType.Walk;
         public bool IsRunning => _stateMachine.CurrentStateType == CharacterStateType.Run;
         public bool IsSitMoving => _stateMachine.CurrentStateType == CharacterStateType.SitMove;
@@ -101,6 +103,11 @@ namespace _Train.Scripts.Character
             
             IsLockRestoreStamina = false;
             _lockStaminaRoutine = null;
+        }
+
+        public void SetPassengers(bool isPass)
+        {
+            IsPassenger = isPass;
         }
 
         private void OnDestroy()

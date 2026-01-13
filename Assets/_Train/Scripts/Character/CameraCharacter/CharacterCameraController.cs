@@ -36,7 +36,7 @@ namespace _Train.Scripts.Character.CameraCharacter
         private float _fixedRotationCenter;
 
         private bool _isFixed;
-        private bool _cameraLocked;
+        [SerializeField] private bool _cameraLocked;
         
         private Quaternion _targetCameraRotation;
         private Quaternion _targetBodyRotation;
@@ -146,8 +146,15 @@ namespace _Train.Scripts.Character.CameraCharacter
                 bodyYRotation += look.x;
                 _targetCameraRotation = Quaternion.Euler(_xRotation, 0f, 0f);
             }
+
+            var yRotate = bodyYRotation;
             
-            _targetBodyRotation = Quaternion.Euler(0f, bodyYRotation, 0f);
+            if (character.IsPassenger)
+            {
+                yRotate += transform.root.eulerAngles.y;
+            }
+            
+            _targetBodyRotation = Quaternion.Euler(0f, yRotate, 0f);
 
             // Плавное вращение
             float smoothFactor = Time.deltaTime * rotationSmoothTime;
