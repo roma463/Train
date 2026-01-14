@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 5633876277609812481}
   - component: {fileID: 1053513195483693618}
   - component: {fileID: 2495162299571442475}
+  - component: {fileID: 3620044629943437590}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -835,10 +836,13 @@ MonoBehaviour:
   _remoteSkinnedMeshRenderer:
   - {fileID: 254772690580783177}
   - {fileID: 4672342734891772628}
-  _localSkinnedMeshRenderer:
-  - {fileID: 0}
-  - {fileID: 0}
+  _localSkinnedMeshRenderer: []
   characterContext: {fileID: 8737586534120517008}
+  energyUI: {fileID: 1798671029965180668}
+  runEnergyPerSecond: 12
+  jumpEnergyCost: 18
+  energyRegenPerSecond: 10
+  minEnergyToAct: 1
 --- !u!114 &3170982582680435272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,6 +870,7 @@ MonoBehaviour:
   cameraStandPosition: -0.13
   cameraSitPosition: -0.19
   cameraLiePosition: -0.7
+  _cameraLocked: 0
   camYRotation: 0
   bodyYRotation: 0
 --- !u!114 &4313759862213458307
@@ -937,6 +942,7 @@ MonoBehaviour:
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: ef664a02141d1764086f6c2e6ea7b7a3, type: 2}
   <CharacterAnimation>k__BackingField: {fileID: 72318222821195586}
   <CameraController>k__BackingField: {fileID: 3170982582680435272}
+  <Energy>k__BackingField: {fileID: 3620044629943437590}
   <DefaultMaterial>k__BackingField: {fileID: 2100000, guid: 73b99a6cf224b0e4c8cf4b52a4a7ad3c, type: 2}
   <DeathMaterial>k__BackingField: {fileID: 2100000, guid: ddb9f20e9263e294b93a0403b5cd375b, type: 2}
   <GrabSystem>k__BackingField: {fileID: 2851925786627255296}
@@ -1193,6 +1199,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   camera: {fileID: 3363940413147142096}
+--- !u!114 &3620044629943437590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714104057340998175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b38a82947651624784ae80d59400a64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Train.Scripts.Character.Energy
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  characterBaseData: {fileID: 11400000, guid: 9e4c8695dedd4d246923c569b69e0f34, type: 2}
+  stateMachine: {fileID: 62375291570300923}
+  character: {fileID: 4333362079066110298}
 --- !u!1 &8635607136535982909
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,6 +3010,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7945007621040116047, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945007621040116047, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7984460859218239102, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -3042,6 +3074,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8509304860794669352, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
+      propertyPath: energy
+      value: 
+      objectReference: {fileID: 3620044629943437590}
+    - target: {fileID: 8611761178515541589, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.1380005
+      objectReference: {fileID: 0}
     - target: {fileID: 8652984635663353115, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -3078,6 +3118,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91d2f4600eebc9459d06cc95b00fb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1798671029965180668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8509304860794669352, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}
+  m_PrefabInstance: {fileID: 7989727044604233684}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5443b4ba0d511478345d39ac0cbae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Train.Scripts.Character.MovementStateMachine.EnergyUi
 --- !u!114 &3835596774502780886 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6619148628615809026, guid: 071a91aeb3296c549922f0f9c262ebd1, type: 3}

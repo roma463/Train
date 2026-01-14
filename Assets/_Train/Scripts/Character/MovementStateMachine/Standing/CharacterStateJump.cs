@@ -14,7 +14,7 @@ namespace _Train.Scripts.Character.MovementStateMachine.Standing
         public override void OnEnterState()
         {
             Jump();
-
+            _stateMachine.Context.Energy.SpendForJump();
             base.OnEnterState();
         }
 

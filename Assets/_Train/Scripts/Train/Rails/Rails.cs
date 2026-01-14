@@ -32,7 +32,6 @@ namespace _Train.Scripts.Train.Rails
             
             _currentRange = Mathf.Clamp01(_currentRange);
             
-            Debug.Log(normalizeSpeed);
             return splineContainer.EvaluatePosition(_currentRange);
         }
 

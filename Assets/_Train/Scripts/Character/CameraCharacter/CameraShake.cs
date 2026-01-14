@@ -67,13 +67,11 @@ namespace _Train.Scripts.Character.CameraCharacter
         
             if (!isGrounded && _wasGrounded && !_isJumping)
             {
-                Debug.Log("Jump");
                 StartJumpBob();
             }
         
             if (isGrounded && !_wasGrounded && _isJumping)
             {
-                Debug.Log("Land");
                 StartLandBob();
             }
         

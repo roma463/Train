@@ -12,6 +12,8 @@ namespace _Train.Scripts.Character
         [field: SerializeField] public CharacterMovementSettings MovementSettings { get; private set; }
         [field: SerializeField] public CharacterAnimation CharacterAnimation { get; private set; }
         [field: SerializeField] public CharacterCameraController CameraController { get; private set; }
+        
+        [field: SerializeField] public Energy Energy { get; private set; }
         [field: SerializeField] public Material DefaultMaterial { get; private set; }
         [field: SerializeField] public Material DeathMaterial { get; private set; }
         [field: SerializeField] public GrabSystem GrabSystem { get; private set; }
