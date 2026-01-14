@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Train.Scripts.Character.Data;
@@ -28,11 +29,29 @@ namespace _Train.Scripts.Character
         [SerializeField] private SkinnedMeshRenderer[] _remoteSkinnedMeshRenderer;
         [SerializeField] private SkinnedMeshRenderer[] _localSkinnedMeshRenderer;
         [SerializeField] private CharacterContext characterContext;
+        [SerializeField] private EnergyUI energyUI;
+        [SerializeField] private float maxEnergy = 100f;
+        [SerializeField] private float runEnergyPerSecond = 12f;
+        [SerializeField] private float jumpEnergyCost = 18f;
+        [SerializeField] private float energyRegenPerSecond = 10f;
+        [SerializeField] private float minEnergyToAct = 1f;
+        
+        [SyncVar] private bool _serverWantsMove;
 
         private Vector3 _startPosition;
         private Vector3 _externalVelocity;
         private Coroutine _lockStaminaRoutine;
         
+        [SyncVar(hook = nameof(OnEnergyChanged))]
+        private float _energy;
+        
+        public event Action<float> EnergyNormalizedChanged;
+
+        public float VerticalVelocity { get; set; }
+        public float Energy => _energy;
+        public float EnergyNormalized => maxEnergy <= 0f ? 0f : Mathf.Clamp01(_energy / maxEnergy);
+        public bool HasEnergyForJump => _energy >= jumpEnergyCost && _energy > minEnergyToAct;
+        public bool IsLockRestoreStamina { get; set; }
         public bool IsWalking => _stateMachine.CurrentStateType == CharacterStateType.Walk;
         public bool IsRunning => _stateMachine.CurrentStateType == CharacterStateType.Run;
         public bool IsSitMoving => _stateMachine.CurrentStateType == CharacterStateType.SitMove;
@@ -198,6 +217,73 @@ namespace _Train.Scripts.Character
             var verticalVelocity = Vector3.up * verticalSpeed;
 
             return horizontalVelocity + verticalVelocity;
+        }
+        //Если ты это нашел, пока меня нет, то - я решил, что это отслеживать будет только сервер, что бы меньше нагрузка была
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            _energy = maxEnergy;
+        }
+        
+        public override void OnStartLocalPlayer()
+        {
+            base.OnStartLocalPlayer();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isServer) return;
+
+            if (_serverWantsMove && _energy > 0f)
+            {
+                _energy = Mathf.Clamp(_energy - runEnergyPerSecond * Time.fixedDeltaTime, 0f, maxEnergy);
+
+                if (_energy <= minEnergyToAct)
+                    _serverWantsMove = false;
+            }
+            else
+            {
+                if (!IsLockRestoreStamina)
+                    _energy = Mathf.Clamp(_energy + energyRegenPerSecond * Time.fixedDeltaTime, 0f, maxEnergy);
+            }
+        }
+        
+        public void SetRunIntent(bool active)
+        {
+            if (!isLocalPlayer) return;
+            CmdSetRunning(active);
+        }
+        
+        public void TrySpendEnergyForJump()
+        {
+            if (!isLocalPlayer) return;
+            CmdTrySpendEnergyForJump();
+        }
+        
+        [Command]
+        private void CmdTrySpendEnergyForJump()
+        {
+            if (_energy < jumpEnergyCost || _energy <= minEnergyToAct)
+                return;
+
+            _energy = Mathf.Clamp(_energy - jumpEnergyCost, 0f, maxEnergy);
+            
+            if (_energy <= minEnergyToAct)
+                _serverWantsMove = false;
+            
+            LockRestoreStamina(isFull: false);
+        }
+        
+        private void OnEnergyChanged(float oldValue, float newValue)
+        {
+            float norm = maxEnergy <= 0f ? 0f : Mathf.Clamp01(newValue / maxEnergy);
+            EnergyNormalizedChanged?.Invoke(norm);
+        }
+        
+        [Command]
+        private void CmdSetRunning(bool wantsRun)
+        {
+            _serverWantsMove = wantsRun && _energy > minEnergyToAct;
         }
 
         public void Move(Vector3 velocity, bool applyGravity = false)

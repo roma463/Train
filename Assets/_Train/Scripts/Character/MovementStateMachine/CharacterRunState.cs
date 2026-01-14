@@ -28,6 +28,7 @@ namespace _Train.Scripts.Character.MovementStateMachine
             _stateMachine.Context.InputHandler.OnMovementCancelled += OnMovementCancelled;
             _stateMachine.Context.InputHandler.OnJumpPerformed += OnJumpPerformed;
             _stateMachine.Context.Character.Collision.OnGroundedCanceled += OnGroundedCanceled;
+            _stateMachine.Context.Character.SetRunIntent(true);
 
             _staminaIsLow = false;
         }
@@ -40,6 +41,7 @@ namespace _Train.Scripts.Character.MovementStateMachine
             _stateMachine.Context.InputHandler.OnMovementCancelled -= OnMovementCancelled;
             _stateMachine.Context.InputHandler.OnJumpPerformed -= OnJumpPerformed;
             _stateMachine.Context.Character.Collision.OnGroundedCanceled -= OnGroundedCanceled;
+            _stateMachine.Context.Character.SetRunIntent(false);
         }
 
         private void OnGroundedCanceled()
@@ -54,6 +56,9 @@ namespace _Train.Scripts.Character.MovementStateMachine
 
         private void OnJumpPerformed()
         {
+            if (!_stateMachine.Context.Character.HasEnergyForJump)
+                return;
+            _stateMachine.Context.Character.TrySpendEnergyForJump();
             _stateMachine.ChangeStateByType(CharacterStateType.Jump);
         }
 
