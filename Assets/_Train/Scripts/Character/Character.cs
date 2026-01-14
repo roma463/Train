@@ -46,12 +46,10 @@ namespace _Train.Scripts.Character
         private float _energy;
         
         public event Action<float> EnergyNormalizedChanged;
-
-        public float VerticalVelocity { get; set; }
+        
         public float Energy => _energy;
         public float EnergyNormalized => maxEnergy <= 0f ? 0f : Mathf.Clamp01(_energy / maxEnergy);
         public bool HasEnergyForJump => _energy >= jumpEnergyCost && _energy > minEnergyToAct;
-        public bool IsLockRestoreStamina { get; set; }
         public bool IsWalking => _stateMachine.CurrentStateType == CharacterStateType.Walk;
         public bool IsRunning => _stateMachine.CurrentStateType == CharacterStateType.Run;
         public bool IsSitMoving => _stateMachine.CurrentStateType == CharacterStateType.SitMove;
