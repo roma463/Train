@@ -170,7 +170,7 @@ namespace _Train.Scripts.Character.CameraCharacter
             
             if (!_isFixed)
             {
-                var rotation = Quaternion.Slerp(transform.localRotation, _targetBodyRotation, smoothFactor);
+                var rotation = Quaternion.Slerp(transform.rotation, _targetBodyRotation, smoothFactor);
                 rb.MoveRotation(rotation);
             }
         }
