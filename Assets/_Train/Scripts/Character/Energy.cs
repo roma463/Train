@@ -17,9 +17,10 @@ namespace _Train.Scripts.Character
     
         [SyncVar(hook = nameof(OnEnergyChanged))]
         private float _syncEnergy;
-        
         private float _energy;
 
+        private bool _inRegenZone;
+        
         public override void OnStartClient()
         {
             _energy = characterBaseData.MaxEnergy;
@@ -29,6 +30,12 @@ namespace _Train.Scripts.Character
         {
             float norm = characterBaseData.MaxEnergy <= 0f ? 0f : Mathf.Clamp01(newValue / characterBaseData.MaxEnergy);
             OnEnergyNormalizedChanged?.Invoke(norm);
+        }
+
+        public void SetRegenZoneState(bool regenZoneState)
+        {
+            if (!isLocalPlayer) return;
+            _inRegenZone = regenZoneState;
         }
     
         private void FixedUpdate()
@@ -47,6 +54,13 @@ namespace _Train.Scripts.Character
                 {
                     OnEnergyEnded?.Invoke();
                 }
+            }
+
+            if (_inRegenZone && _energy < characterBaseData.MaxEnergy)
+            {
+                var regenValue = characterBaseData.IdleEnergyPerSecond * Time.fixedDeltaTime;
+                _energy = Mathf.Clamp(_energy + regenValue, 0, characterBaseData.MaxEnergy);
+                CmdSyncEnergy(_energy);
             }
         }
 
@@ -68,6 +82,7 @@ namespace _Train.Scripts.Character
             
             if (character.IsWalking)
                 return characterBaseData.WalkEnergyPerSecond;
+            
 
             throw new Exception("Character is not spending stamina");
         }

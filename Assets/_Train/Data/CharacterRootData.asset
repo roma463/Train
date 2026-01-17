@@ -17,7 +17,7 @@ MonoBehaviour:
   <MaxVerticalVelocity>k__BackingField: 20
   <TimeForStartRestoreStamina>k__BackingField: 1
   <MaxEnergy>k__BackingField: 100
-  <IdleEnergyPerSecond>k__BackingField: 1
-  <WalkEnergyPerSecond>k__BackingField: 12
-  <RunEnergyPerSecond>k__BackingField: 12
-  <JumpEnergyPerSecond>k__BackingField: 1
+  <IdleEnergyPerSecond>k__BackingField: 10
+  <WalkEnergyPerSecond>k__BackingField: 1
+  <RunEnergyPerSecond>k__BackingField: 5
+  <JumpEnergyPerSecond>k__BackingField: 10
