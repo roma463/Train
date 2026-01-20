@@ -2,6 +2,7 @@ using System;
 using _Train.Scripts.Root;
 using _Train.Scripts.Character.MovementStateMachine;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Train.Scripts.Character.CameraCharacter
@@ -34,20 +35,17 @@ namespace _Train.Scripts.Character.CameraCharacter
         private float _maxLeftAngle;
         private float _maxRightAngle;
         private float _fixedRotationCenter;
-
-        private bool _isFixed;
+        
         [SerializeField] private bool _cameraLocked;
         
         private Quaternion _targetCameraRotation;
         private Quaternion _targetBodyRotation;
         private Quaternion _targetBodySmoothRotation;
         
-        [HideInInspector] public float camYRotation = 0f;
-        [HideInInspector] public float bodyYRotation = 0f;
+        private float bodyYRotation = 0f;
         
         private Vector2 LookDirection => INPUTE.instance.MouseDelta;
-        public Transform LookPosition => lookPosition;
-        public Transform CameraTransform => cameraTransform;
+        
         
         private void Start()
         {
@@ -82,19 +80,6 @@ namespace _Train.Scripts.Character.CameraCharacter
                 UpdateCameraRotation();
             }
         }
-        
-        public void FixateCamera()
-        {
-            _fixedRotationCenter = cameraTransform.rotation.eulerAngles.y;
-            SetRotationLimits(-maxLyingLookAngle, maxLyingLookAngle);
-            _isFixed = true;
-        }
-
-        public void FreeCamera()
-        {
-            SetRotationLimits(0f, 0f);
-            _isFixed = false;
-        }
 
         public void LockCamera()
         {
@@ -105,88 +90,40 @@ namespace _Train.Scripts.Character.CameraCharacter
         {
             _cameraLocked = false;
         }
-
-        public void ResetCameraLimits()
-        {
-            if (_isFixed)
-            {
-                _fixedRotationCenter = rb.rotation.eulerAngles.y;
-                SetRotationLimits(-maxLyingLookAngle, maxLyingLookAngle);
-            }
-            else
-            {
-                SetRotationLimits(0f, 0f);
-            }
-        }
         
         private void UpdateCameraRotation()
         {
             if (_cameraLocked)
                 return;
             
-            Vector2 look = (LookDirection * mouseSensitivity) * Time.deltaTime;
-
-            // Обновление целевого вращения
-            camYRotation += look.x;
+            Vector2 look = (LookDirection) * Time.deltaTime;
+            
             _xRotation -= look.y;
             _xRotation = Mathf.Clamp(_xRotation, -maxLookAngle, maxLookAngle);
+            
+            bodyYRotation += look.x;
+            _targetCameraRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-            if (_isFixed)
-            {
-                _fixedRotationCenter = rb.rotation.eulerAngles.y;
-                float minRotation = _fixedRotationCenter + _maxLeftAngle;
-                float maxRotation = _fixedRotationCenter + _maxRightAngle;
-                
-                camYRotation = Mathf.Clamp(camYRotation, minRotation, maxRotation);
-                
-                _targetCameraRotation = Quaternion.Euler(_xRotation, camYRotation, 0f);
-            }
-            else
-            {
-                bodyYRotation += look.x;
-                _targetCameraRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-            }
-
-            var yRotate = bodyYRotation;
+            var yRotate = look.x;
             
             if (character.IsPassenger)
             {
-                yRotate += transform.root.eulerAngles.y;
-            }
-            
-            _targetBodyRotation = Quaternion.Euler(0f, yRotate, 0f);
+                Quaternion parentWorldRotation = transform.root.rotation;
 
-            // Плавное вращение
-            float smoothFactor = Time.deltaTime * rotationSmoothTime;
-
-            if (_isFixed)
-            {
-                cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, _targetCameraRotation, smoothFactor);
+                yRotate += bodyYRotation;
+                Quaternion relativeRotation = Quaternion.Euler(0f, yRotate, 0f);
+                _targetBodyRotation = parentWorldRotation * relativeRotation;
             }
             else
             {
-                cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, _targetCameraRotation, smoothFactor);
+                _targetBodyRotation = Quaternion.Euler(0f, _targetBodyRotation.eulerAngles.y + yRotate, 0f);
             }
+
+            float smoothFactor = Time.deltaTime * rotationSmoothTime;
             
-            if (!_isFixed)
-            {
-                var rotation = Quaternion.Slerp(transform.rotation, _targetBodyRotation, smoothFactor);
-                rb.MoveRotation(rotation);
-            }
-        }
-        
-        public void SetRotationLimits(float leftAngle, float rightAngle)
-        {
-            _maxLeftAngle = leftAngle;
-            _maxRightAngle = rightAngle;
-        
-            // Если фиксация активна, применяем новые ограничения
-            if (_isFixed)
-            {
-                float minRotation = _fixedRotationCenter + _maxLeftAngle;
-                float maxRotation = _fixedRotationCenter + _maxRightAngle;
-                camYRotation = Mathf.Clamp(camYRotation, minRotation, maxRotation);
-            }
+            cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, _targetCameraRotation, smoothFactor);
+            var rotation = Quaternion.Slerp(transform.rotation, _targetBodyRotation, smoothFactor);
+            rb.MoveRotation(rotation);
         }
     }
 }

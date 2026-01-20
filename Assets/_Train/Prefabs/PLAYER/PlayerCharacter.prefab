@@ -858,7 +858,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  mouseSensitivity: 3
+  mouseSensitivity: 25
   maxLookAngle: 90
   maxLyingLookAngle: 30
   cameraTransform: {fileID: 1010101840971660001}
@@ -868,7 +868,7 @@ MonoBehaviour:
   stateMachine: {fileID: 62375291570300923}
   rotationSmoothTime: 15
   cameraStandPosition: -0.13
-  cameraSitPosition: -0.19
+  cameraSitPosition: -0.4
   cameraLiePosition: -0.7
   _cameraLocked: 0
   camYRotation: 0
