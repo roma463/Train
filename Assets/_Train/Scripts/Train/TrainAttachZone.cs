@@ -33,19 +33,18 @@ public class TrainAttachZone : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!trainMotion) return;
-        if (passengers.Count == 0) return;
+        if (!trainMotion || passengers.Count == 0) 
+            return;
 
-        Vector3 v = trainMotion.Velocity;
-
-        foreach (var ch in passengers)
+        foreach (var character in passengers)
         {
-            if (!ch) continue;
+            if (!character) continue;
 
-            if (onlyLocalPlayer && !ch.isLocalPlayer)
+            if (onlyLocalPlayer && !character.isLocalPlayer)
                 continue;
 
-            ch.SetExternalVelocity(v);
+            character.SetExternalVelocity(trainMotion.Velocity);
+            character.SetAngularVelocity(trainMotion.AngularVelocity);
         }
     }
 

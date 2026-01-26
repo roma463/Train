@@ -37,6 +37,7 @@ namespace _Train.Scripts.Character
 
         private Vector3 _startPosition;
         private Vector3 _externalVelocity;
+        private Vector3 _angularVelosity;
         private Coroutine _lockStaminaRoutine;
         
         public event Action<float> EnergyNormalizedChanged;
@@ -54,13 +55,14 @@ namespace _Train.Scripts.Character
         public bool IsInvisible { get; private set; }
 #endif
 
+        public void SetExternalVelocity(Vector3 velocity) => _externalVelocity = velocity;
+        public void SetAngularVelocity(Vector3 velocity) => _angularVelosity = velocity;
+        
         private void Awake()
         {
             _startPosition = transform.position;
         }
         
-        public void SetExternalVelocity(Vector3 velocity) => _externalVelocity = velocity;  
-
         public void LockPlayer()
         {
             IsLockPlayer = true;
@@ -175,7 +177,6 @@ namespace _Train.Scripts.Character
         [Server]
         public void TakeDamage(int damageAmount)
         {
-            
             if (!isLocalPlayer)
                 TrgTakeDamage(connectionToClient, damageAmount);
         }
@@ -187,20 +188,14 @@ namespace _Train.Scripts.Character
         
         private Vector3 CalculateCorrectParabolicVelocity(Vector3 direction, float totalForce, float height)
         {
-            // Нормализуем направление и получаем горизонтальную компоненту
             var horizontalDir = new Vector3(direction.x, 0, direction.z).normalized;
-
-            // Вертикальная скорость для достижения максимальной высоты
             var verticalSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * height);
-
-            // Горизонтальная скорость (сохраняем общую силу через теорему Пифагора)
             var horizontalSpeed = Mathf.Sqrt(totalForce * totalForce - verticalSpeed * verticalSpeed);
 
-            // Если verticalSpeed больше totalForce, ограничиваем ее
             if (float.IsNaN(horizontalSpeed))
             {
-                horizontalSpeed = totalForce * 0.7f; // 70% силы на горизонталь
-                verticalSpeed = totalForce * 0.3f; // 30% силы на вертикаль
+                horizontalSpeed = totalForce * 0.7f;
+                verticalSpeed = totalForce * 0.3f;
             }
 
             var horizontalVelocity = horizontalDir * horizontalSpeed;
@@ -216,6 +211,15 @@ namespace _Train.Scripts.Character
                 return;
             }
 
+            if (IsPassenger)
+            {
+                if (_angularVelosity != Vector3.zero)
+                {
+                    var directionToCenter =  (transform.parent.position - transform.position);
+                    velocity += -Vector3.Cross(_angularVelosity, directionToCenter);
+                }
+            }
+            
             velocity += _externalVelocity;
             
             if (applyGravity)
@@ -236,7 +240,7 @@ namespace _Train.Scripts.Character
             var gravityEffect = _stateMachine.Context.Character.Gravity * Time.fixedDeltaTime;
             VerticalVelocity = targetVeloсity.y + gravityEffect;
             VerticalVelocity = Mathf.Clamp(VerticalVelocity, -characterBaseData.MaxVerticalVelocity, characterBaseData.MaxVerticalVelocity);
-        }
+        } 
 
         private IEnumerator StartRespawn()
         {

@@ -19,6 +19,7 @@ namespace _Train.Scripts.Train
         private float targetSpeed;
 
         private Vector3 prevPos;
+        public Vector3 AngularVelocity => trainRb.angularVelocity; 
     
         private void Awake()
         {
